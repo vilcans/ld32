@@ -49,22 +49,22 @@ public class TileMap : MonoBehaviour {
     }
 
     GameObject CreateObject(byte tileCode) {
-        if(tileCode == 0) {
+        if(tileCode == 17) {
             GameObject obj = (GameObject)Object.Instantiate(homePrefab);
             obj.name = "Home";
             return obj;
         }
-        if(tileCode == 3) {
+        if(tileCode == 20) {
             GameObject obj = (GameObject)Object.Instantiate(schoolPrefab);
             obj.name = "School";
             return obj;
         }
-        if(tileCode == 24) {
+        if(tileCode == 41) {
             GameObject obj = (GameObject)Object.Instantiate(workPrefab);
             obj.name = "Work";
             return obj;
         }
-        if(tileCode == 27) {
+        if(tileCode == 44) {
             GameObject obj = (GameObject)Object.Instantiate(terrorPrefab);
             return obj;
         }
