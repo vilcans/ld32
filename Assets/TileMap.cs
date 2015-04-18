@@ -77,7 +77,7 @@ public class TileMap : MonoBehaviour {
 
     public void WorldToColRow(Vector3 pos, out int col, out int row) {
         col = Mathf.FloorToInt(pos.x + width * .5f);
-        row = Mathf.FloorToInt(height * .5f - pos.y);
+        row = Mathf.FloorToInt(height * .5f - pos.z);
     }
 
     public int NumberOfIndices {
