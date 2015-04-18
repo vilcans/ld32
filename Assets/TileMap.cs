@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 public class TileMap : MonoBehaviour {
 
-    public enum Direction {
-        Left, Right, Up, Down
-    };
-
     public GameObject homePrefab;
     public GameObject schoolPrefab;
     public GameObject workPrefab;

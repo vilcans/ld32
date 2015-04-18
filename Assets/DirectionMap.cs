@@ -10,12 +10,12 @@ public class DirectionMap : MonoBehaviour {
     private struct PathItem {
         public int col;
         public int row;
-        public TileMap.Direction fromDirection;
+        public Direction fromDirection;
         public float cost;
         public override string ToString() {
             return "col " + col + " row " + row + " from " + fromDirection + " cost " + cost;
         }
-        public PathItem(int col, int row, TileMap.Direction fromDirection, float cost) {
+        public PathItem(int col, int row, Direction fromDirection, float cost) {
             this.col = col;
             this.row = row;
             this.fromDirection = fromDirection;
@@ -25,12 +25,12 @@ public class DirectionMap : MonoBehaviour {
     
     // Costs to move to this object from every position on the map
     private float[] costs;
-    private TileMap.Direction[] directions;
+    private Direction[] directions;
 
     void Start() {
         Debug.Log("Starting " + this.name);
         costs = new float[map.width * map.height];
-        directions = new TileMap.Direction[map.width * map.height];
+        directions = new Direction[map.width * map.height];
         for(var i = 0; i < map.NumberOfIndices; ++i) {
             costs[i] = Mathf.Infinity;
         }
@@ -40,7 +40,7 @@ public class DirectionMap : MonoBehaviour {
 
     public void UpdateMap() {
         Queue<PathItem> path = new Queue<PathItem>();
-        path.Enqueue(new PathItem(targetColumn, targetRow, TileMap.Direction.Left, 0));
+        path.Enqueue(new PathItem(targetColumn, targetRow, Direction.Left, 0));
 
         int iterations = 0;
         while(path.Count != 0) {
@@ -59,7 +59,7 @@ public class DirectionMap : MonoBehaviour {
             costs[index] = item.cost;
             directions[index] = item.fromDirection;
             //Debug.Log("Update map " + item);
-            foreach (TileMap.Direction dir in System.Enum.GetValues(typeof(TileMap.Direction))) {
+            foreach (Direction dir in System.Enum.GetValues(typeof(Direction))) {
                 int newCol = item.col;
                 int newRow = item.row;
                 map.Walk(ref newCol, ref newRow, dir);
@@ -89,16 +89,16 @@ public class DirectionMap : MonoBehaviour {
                     s.AppendFormat("{0,5:F1}", w);
                 }
                 switch(directions[index]) {
-                case TileMap.Direction.Left:
+                case Direction.Left:
                     s.Append("< ");
                     break;
-                case TileMap.Direction.Right:
+                case Direction.Right:
                     s.Append("> ");
                     break;
-                case TileMap.Direction.Up:
+                case Direction.Up:
                     s.Append("^ ");
                     break;
-                case TileMap.Direction.Down:
+                case Direction.Down:
                     s.Append("v ");
                     break;
                 }
