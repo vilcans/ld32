@@ -12,6 +12,8 @@ public class FollowDirections : MonoBehaviour {
         TileMap map = TileMap.instance;
         map.WorldToColRow(pos, out col, out row);
 
+        float timeInStep = 0;
+
         do {
             while(directions == null) {
                 yield return null;
@@ -31,13 +33,13 @@ public class FollowDirections : MonoBehaviour {
                 map.Walk(ref col, ref row, dir);
                 Vector3 oldPos = this.transform.position;
                 Vector3 newPos = map.ColRowToWorld(col, row);
-                float t = 0;
                 float transitionLength = Vector3.Distance(oldPos, newPos) / moveSpeed;
-                while(t < transitionLength) {
-                    this.transform.position = Vector3.Lerp(oldPos, newPos, t / transitionLength);
-                    t += Time.deltaTime;
+                while(timeInStep < transitionLength) {
+                    this.transform.position = Vector3.Lerp(oldPos, newPos, timeInStep / transitionLength);
+                    timeInStep += Time.deltaTime;
                     yield return null;
                 }
+                timeInStep -= transitionLength;
                 this.transform.position = newPos;
             }
         } while(true);
