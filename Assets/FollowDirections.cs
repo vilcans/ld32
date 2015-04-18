@@ -57,6 +57,6 @@ public class FollowDirections : MonoBehaviour {
                 this.directions = m;
             }
         }
-        Debug.Log("Found best goal: " + this.directions + " cost " + lowestCost);
+        //Debug.Log("Found best goal: " + this.directions + " cost " + lowestCost);
     }
 }

@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec08f8f1e8ebe44d288cc5e8d54cb8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayBetweenUpdates: .0199999996
 --- !u!114 &1422719700
 MonoBehaviour:
   m_ObjectHideFlags: 0
