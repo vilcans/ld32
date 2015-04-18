@@ -13,8 +13,9 @@ public class GiveGoals : MonoBehaviour {
                 Debug.Log("No candidates yet; hold on");
                 continue;
             }
-            //Debug.Log ("Found candidates: " + candidates.Length);
-            foreach(FollowDirections follower in GetComponentsInChildren<FollowDirections>()) {
+            FollowDirections[] followers = GetComponentsInChildren<FollowDirections>();
+            //Debug.Log("Giving " + candidates.Length + " goals to chose from to " + followers.Length + " people");
+            foreach(FollowDirections follower in followers) {
                 follower.ChooseDirection(candidates);
                 yield return new WaitForSeconds(delayBetweenUpdates);
             }

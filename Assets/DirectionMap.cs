@@ -6,7 +6,8 @@ public class DirectionMap : MonoBehaviour {
     public TileMap map;
     public int targetColumn;
     public int targetRow;
-    
+    public List<FollowDirections.State> acceptedByStates;
+
     private struct PathItem {
         public int col;
         public int row;

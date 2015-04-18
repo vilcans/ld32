@@ -115,6 +115,7 @@ MonoBehaviour:
   map: {fileID: 0}
   targetColumn: 0
   targetRow: 0
+  acceptedByStates: 0000000001000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

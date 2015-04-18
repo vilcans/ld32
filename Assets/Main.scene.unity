@@ -258,7 +258,8 @@ MonoBehaviour:
   dirtPrefab: {fileID: 186952, guid: 96ddfdd78e754473bb11d623f84dd59f, type: 2}
   groundCost: 5
   dirtCost: 1
-  shrinkObjects: 0
+  insideCost: 1
+  shrinkObjects: 1
   width: 30
   height: 20
 --- !u!4 &1422719698

@@ -13,6 +13,7 @@ public class TileMap : MonoBehaviour {
 
     public float groundCost = 1.0f;
     public float dirtCost = 1.0f;
+    public float insideCost = 1.0f;
 
     public bool shrinkObjects = false;
 
@@ -115,6 +116,11 @@ public class TileMap : MonoBehaviour {
             return groundCost;
         case 50:
             return dirtCost;
+        case 17:
+        case 20:
+        case 41:
+        case 44:
+            return insideCost;
         default:
 			return Mathf.Infinity;
         }

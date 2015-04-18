@@ -3,8 +3,14 @@ using System.Collections;
 
 public class FollowDirections : MonoBehaviour {
 
+    public enum State {
+        Child,
+        Adult
+    }
+
     public DirectionMap directions;
     public int col, row;
+    public State state = State.Child;
 
     [Tooltip("Movement speed for cost=1")]
     public float moveSpeed = 3.0f;
@@ -26,7 +32,7 @@ public class FollowDirections : MonoBehaviour {
             if(directions.IsAtGoal(col, row)) {
                 Debug.Log("Reached goal!");
                 Destroy(this.gameObject);
-                break;
+				break;
             }
             else {
                 Direction dir = directions.GetDirection(col, row).GetOpposite();
@@ -51,12 +57,19 @@ public class FollowDirections : MonoBehaviour {
     public void ChooseDirection(DirectionMap[] directions) {
         float lowestCost = Mathf.Infinity;
         foreach(DirectionMap m in directions) {
+            if(!IsAcceptableGoal(m)) {
+                continue;
+            }
             float cost = m.GetCostToGoal(this.col, this.row);
             if(cost < lowestCost) {
                 lowestCost = cost;
                 this.directions = m;
             }
         }
-        //Debug.Log("Found best goal: " + this.directions + " cost " + lowestCost);
+        //Debug.Log(this.state + " found best goal: " + this.directions + " cost " + lowestCost);
+    }
+
+    public bool IsAcceptableGoal(DirectionMap goal) {
+        return goal.acceptedByStates.Contains(this.state);
     }
 }
