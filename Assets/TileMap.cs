@@ -110,9 +110,6 @@ public class TileMap : MonoBehaviour {
     public float GetCost(byte tileType) {
         switch(tileType) {
         case 48:
-        case 49:
-        case 56:
-        case 57:
             return groundCost;
         case 50:
             return dirtCost;
