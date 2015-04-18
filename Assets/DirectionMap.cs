@@ -46,13 +46,17 @@ public class DirectionMap : MonoBehaviour {
         return directions[map.GetIndex(col, row)];
     }
 
+    public float GetCostToGoal(int col, int row) {
+        return costs[map.GetIndex(col, row)];
+    }
+
     public void UpdateMap() {
         Queue<PathItem> path = new Queue<PathItem>();
         path.Enqueue(new PathItem(targetColumn, targetRow, Direction.Left, 0));
 
         int iterations = 0;
         while(path.Count != 0) {
-            if(++iterations > 20000) {
+            if(++iterations > 100000) {
                 Print();
                 throw new System.ApplicationException ("Too many iterations");
             }

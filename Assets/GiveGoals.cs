@@ -5,10 +5,12 @@ public class GiveGoals : MonoBehaviour {
 
     IEnumerator Start() {
         while(true) {
-            DirectionMap directions = GetComponentInChildren<DirectionMap>();
-            Debug.Log("Giving new directions: " + directions);
-            foreach(FollowDirections follower in GetComponentsInChildren<FollowDirections>()) {
-                follower.directions = directions;
+            DirectionMap[] candidates = GetComponentsInChildren<DirectionMap>();
+            if(candidates.Length != 0) {
+                foreach(FollowDirections follower in GetComponentsInChildren<FollowDirections>()) {
+                    follower.ChooseDirection(candidates);
+                }
+                yield return new WaitForSeconds(.02f);
             }
             yield return new WaitForSeconds(3);
         }

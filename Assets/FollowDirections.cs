@@ -4,15 +4,14 @@ using System.Collections;
 public class FollowDirections : MonoBehaviour {
 
     public DirectionMap directions;
+    public int col, row;
 
     [Tooltip("Movement speed for cost=1")]
     public float moveSpeed = 3.0f;
 
     IEnumerator Start() {
-        Vector3 pos = this.transform.position;
-        int col, row;
         TileMap map = TileMap.instance;
-        map.WorldToColRow(pos, out col, out row);
+        this.transform.position = map.ColRowToWorld(col, row);
 
         float timeInStep = 0;
 
@@ -33,7 +32,7 @@ public class FollowDirections : MonoBehaviour {
                 Direction dir = directions.GetDirection(col, row).GetOpposite();
                 byte tileType = map.GetTile(col, row);
                 float cost = map.GetCost(tileType);
-                Debug.Log("Walking " + dir + " from " + col + "," + row + " cost " + cost);
+                //Debug.Log("Walking " + dir + " from " + col + "," + row + " cost " + cost);
                 map.Walk(ref col, ref row, dir);
                 Vector3 oldPos = this.transform.position;
                 Vector3 newPos = map.ColRowToWorld(col, row);
@@ -47,5 +46,17 @@ public class FollowDirections : MonoBehaviour {
                 this.transform.position = newPos;
             }
         } while(true);
+    }
+
+    public void ChooseDirection(DirectionMap[] directions) {
+        float lowestCost = Mathf.Infinity;
+        foreach(DirectionMap m in directions) {
+            float cost = m.GetCostToGoal(this.col, this.row);
+            if(cost < lowestCost) {
+                lowestCost = cost;
+                this.directions = m;
+            }
+        }
+        Debug.Log("Found best goal: " + this.directions + " cost " + lowestCost);
     }
 }
