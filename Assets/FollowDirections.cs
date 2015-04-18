@@ -4,6 +4,8 @@ using System.Collections;
 public class FollowDirections : MonoBehaviour {
 
     public DirectionMap directions;
+
+    [Tooltip("Movement speed for cost=1")]
     public float moveSpeed = 3.0f;
 
     IEnumerator Start() {
@@ -29,11 +31,13 @@ public class FollowDirections : MonoBehaviour {
             }
             else {
                 Direction dir = directions.GetDirection(col, row).GetOpposite();
-                Debug.Log("Walking " + dir + " from " + col + "," + row);
+                byte tileType = map.GetTile(col, row);
+                float cost = map.GetCost(tileType);
+                Debug.Log("Walking " + dir + " from " + col + "," + row + " cost " + cost);
                 map.Walk(ref col, ref row, dir);
                 Vector3 oldPos = this.transform.position;
                 Vector3 newPos = map.ColRowToWorld(col, row);
-                float transitionLength = Vector3.Distance(oldPos, newPos) / moveSpeed;
+                float transitionLength = Vector3.Distance(oldPos, newPos) / moveSpeed * cost;
                 while(timeInStep < transitionLength) {
                     this.transform.position = Vector3.Lerp(oldPos, newPos, timeInStep / transitionLength);
                     timeInStep += Time.deltaTime;

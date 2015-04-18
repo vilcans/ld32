@@ -42,7 +42,7 @@ public class DirectionMap : MonoBehaviour {
 		return col == this.targetColumn && row == this.targetRow;
 	}
 
-	public Direction GetDirection(int col, int row) {
+    public Direction GetDirection(int col, int row) {
         return directions[map.GetIndex(col, row)];
     }
 

@@ -11,8 +11,8 @@ public class TileMap : MonoBehaviour {
     public GameObject terrorPrefab;
     public GameObject dirtPrefab;
 
-    public float groundWeight = 1.0f;
-    public float dirtWeight = 1.0f;
+    public float groundCost = 1.0f;
+    public float dirtCost = 1.0f;
 
     public bool shrinkObjects = false;
 
@@ -112,7 +112,9 @@ public class TileMap : MonoBehaviour {
         case 49:
         case 56:
         case 57:
-            return groundWeight;
+            return groundCost;
+        case 50:
+            return dirtCost;
         default:
 			return Mathf.Infinity;
         }
