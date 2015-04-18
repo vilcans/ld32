@@ -9,6 +9,7 @@ public class TileMap : MonoBehaviour {
     public GameObject schoolPrefab;
     public GameObject workPrefab;
     public GameObject terrorPrefab;
+    public GameObject dirtPrefab;
 
     public float groundWeight = 1.0f;
     public float dirtWeight = 1.0f;
@@ -73,6 +74,14 @@ public class TileMap : MonoBehaviour {
             GameObject obj = (GameObject)Object.Instantiate(terrorPrefab);
             return obj;
         }
+        if(tileCode == 50) {
+            GameObject obj = (GameObject)Object.Instantiate(dirtPrefab);
+            return obj;
+        }
+        /*if(tileCode == 48 || tileCode == 49 || tileCode == 56 || tileCode == 57) {
+            GameObject obj = (GameObject)Object.Instantiate(dirtPrefab);
+            return obj;
+        }*/
         return null;
     }
 

@@ -255,6 +255,7 @@ MonoBehaviour:
   schoolPrefab: {fileID: 151430, guid: df9dab80abcae4d71bfa316d61c53e23, type: 2}
   workPrefab: {fileID: 141022, guid: be39fa53f73904a5a91f1908e24912dc, type: 2}
   terrorPrefab: {fileID: 114258, guid: 717d8eed673234f2a8e098bcf2de0898, type: 2}
+  dirtPrefab: {fileID: 186952, guid: 96ddfdd78e754473bb11d623f84dd59f, type: 2}
   groundWeight: 1
   dirtWeight: 1
   shrinkObjects: 0
