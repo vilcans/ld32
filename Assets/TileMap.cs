@@ -13,6 +13,8 @@ public class TileMap : MonoBehaviour {
     public float groundWeight = 1.0f;
     public float dirtWeight = 1.0f;
 
+    public bool shrinkObjects = false;
+
     private MapData mapData = new MapData();
     public int width = 30;
     public int height = 20;
@@ -37,6 +39,9 @@ public class TileMap : MonoBehaviour {
                 }
                 obj.transform.parent = this.gameObject.transform;
                 obj.transform.position = ColRowToWorld(col, row);
+                if(shrinkObjects) {
+                    obj.transform.localScale = new Vector3(1, .1f, 1);
+                }
                 DirectionMap directionMap = obj.GetComponent<DirectionMap>();
                 if(directionMap != null) {
                     directionMap.map = this;

@@ -257,6 +257,7 @@ MonoBehaviour:
   terrorPrefab: {fileID: 114258, guid: 717d8eed673234f2a8e098bcf2de0898, type: 2}
   groundWeight: 1
   dirtWeight: 1
+  shrinkObjects: 0
   width: 30
   height: 20
 --- !u!4 &1422719698
