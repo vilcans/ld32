@@ -59,6 +59,6 @@ public class TileMap : MonoBehaviour {
     }
 
     public Vector3 RowColToWorld(int row, int col) {
-        return new Vector3(col - width * .5f, 0, height - row);
+        return new Vector3(col - width * .5f, 0, height * .5f - row);
     }
 }
