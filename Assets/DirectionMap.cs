@@ -53,18 +53,18 @@ public class DirectionMap : MonoBehaviour {
             int index = map.GetIndex(item.col, item.row);
             float oldCost = costs[index];
             if(oldCost <= item.cost) {
-                Debug.Log("didn't beat cost " + oldCost + " with " + item);
+                //Debug.Log("didn't beat cost " + oldCost + " with " + item);
                 continue;
             }
             costs[index] = item.cost;
             directions[index] = item.fromDirection;
-            Debug.Log("Update map " + item);
+            //Debug.Log("Update map " + item);
             foreach (TileMap.Direction dir in System.Enum.GetValues(typeof(TileMap.Direction))) {
                 int newCol = item.col;
                 int newRow = item.row;
                 map.Walk(ref newCol, ref newRow, dir);
                 if(!map.IsInBounds(newCol, newRow)) {
-                    Debug.Log("Out of bounds: " + newCol + " " + newRow);
+                    //Debug.Log("Out of bounds: " + newCol + " " + newRow);
                     continue;
                 }
                 float newCost = item.cost + map.GetCost(map.GetTile(newCol, newRow));
@@ -77,28 +77,33 @@ public class DirectionMap : MonoBehaviour {
 
     public void Print() {
         for(int row = 0; row < map.height; ++row) {
-            string s = string.Format("{0,-3}", row) + ": ";
+            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            s.AppendFormat("{0,-3}: ", row);
             for(int col = 0; col < map.width; ++col) {
                 int index = map.GetIndex(col, row);
                 float w = costs[index];
-                string f = (w == Mathf.Infinity) ? "   99.9" : string.Format("{0,-5:F1}", w);
-                s += f;
+                if(w == Mathf.Infinity) {
+                    s.Append("  99.9");
+                }
+                else {
+                    s.AppendFormat("{0,5:F1}", w);
+                }
                 switch(directions[index]) {
                 case TileMap.Direction.Left:
-                    s += "< ";
+                    s.Append("< ");
                     break;
                 case TileMap.Direction.Right:
-                    s += "> ";
+                    s.Append("> ");
                     break;
                 case TileMap.Direction.Up:
-                    s += "^ ";
+                    s.Append("^ ");
                     break;
                 case TileMap.Direction.Down:
-                    s += "v ";
+                    s.Append("v ");
                     break;
                 }
             }
-            Debug.Log(s);
+            Debug.Log(s.ToString());
         }
     }
 }
