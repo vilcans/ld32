@@ -4,6 +4,7 @@ using System.Collections;
 public class FollowDirections : MonoBehaviour {
 
     public DirectionMap directions;
+    public float moveSpeed = 3.0f;
 
     IEnumerator Start() {
         Vector3 pos = this.transform.position;
@@ -31,7 +32,7 @@ public class FollowDirections : MonoBehaviour {
                 Vector3 oldPos = this.transform.position;
                 Vector3 newPos = map.ColRowToWorld(col, row);
                 float t = 0;
-                float transitionLength = .2f;
+                float transitionLength = Vector3.Distance(oldPos, newPos) / moveSpeed;
                 while(t < transitionLength) {
                     this.transform.position = Vector3.Lerp(oldPos, newPos, t / transitionLength);
                     t += Time.deltaTime;
