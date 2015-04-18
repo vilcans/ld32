@@ -38,6 +38,14 @@ public class DirectionMap : MonoBehaviour {
         Print();
     }
 
+	public bool IsAtGoal(int col, int row) {
+		return col == this.targetColumn && row == this.targetRow;
+	}
+
+	public Direction GetDirection(int col, int row) {
+        return directions[map.GetIndex(col, row)];
+    }
+
     public void UpdateMap() {
         Queue<PathItem> path = new Queue<PathItem>();
         path.Enqueue(new PathItem(targetColumn, targetRow, Direction.Left, 0));

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class TileMap : MonoBehaviour {
 
+    public static TileMap instance;
+
     public GameObject homePrefab;
     public GameObject schoolPrefab;
     public GameObject workPrefab;
@@ -17,6 +19,7 @@ public class TileMap : MonoBehaviour {
     private byte[] tileData;
 
     void Start() {
+        instance = this;
         this.width = mapData.width;
         this.height = mapData.height;
         this.tileData = mapData.tileData;
@@ -32,7 +35,8 @@ public class TileMap : MonoBehaviour {
                 if(obj == null) {
                     continue;
                 }
-                obj.transform.position = RowColToWorld(row, col);
+                obj.transform.parent = this.gameObject.transform;
+                obj.transform.position = ColRowToWorld(col, row);
                 DirectionMap directionMap = obj.GetComponent<DirectionMap>();
                 if(directionMap != null) {
                     directionMap.map = this;
@@ -67,8 +71,13 @@ public class TileMap : MonoBehaviour {
         return null;
     }
 
-    public Vector3 RowColToWorld(int row, int col) {
+    public Vector3 ColRowToWorld(int col, int row) {
         return new Vector3(col - width * .5f, 0, height * .5f - row);
+    }
+
+    public void WorldToColRow(Vector3 pos, out int col, out int row) {
+        col = Mathf.FloorToInt(pos.x + width * .5f);
+        row = Mathf.FloorToInt(height * .5f - pos.y);
     }
 
     public int NumberOfIndices {
