@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 public class TileMap : MonoBehaviour {
 
-    public GameObject homePrefab;
+	public GameObject homePrefab;
+	public GameObject schoolPrefab;
+	public GameObject workPrefab;
+	public GameObject terrorPrefab;
 
 	private MapData mapData = new MapData();
 	private int width = 30;
@@ -39,18 +42,17 @@ public class TileMap : MonoBehaviour {
 			return obj;
 		}
 		if(tileCode == 3) {
-			GameObject obj = (GameObject)Object.Instantiate(homePrefab);
+			GameObject obj = (GameObject)Object.Instantiate(schoolPrefab);
 			obj.name = "School";
 			return obj;
 		}
 		if(tileCode == 24) {
-			GameObject obj = (GameObject)Object.Instantiate(homePrefab);
+			GameObject obj = (GameObject)Object.Instantiate(workPrefab);
 			obj.name = "Work";
 			return obj;
 		}
 		if(tileCode == 27) {
-			GameObject obj = (GameObject)Object.Instantiate(homePrefab);
-			obj.name = "Terror";
+			GameObject obj = (GameObject)Object.Instantiate(terrorPrefab);
 			return obj;
 		}
 		return null;
