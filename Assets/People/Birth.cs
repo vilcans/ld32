@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Birth : MonoBehaviour {
 
-    public float timeBetweenBirths;
+    public float timeBetweenBirths = 2.0f;
+    public int totalChildren = 7;
 
     public GameObject personPrefab;
 
     IEnumerator Start() {
-        while(true) {
+        for(int i = 0; i < totalChildren; ++i) {
             yield return new WaitForSeconds(timeBetweenBirths);
             Spawn();
         }
