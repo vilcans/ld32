@@ -18,7 +18,7 @@ public class Birth : MonoBehaviour {
         EduGame game = gameObject.GetComponentInParent<EduGame>();
         GameObject obj = (GameObject)Object.Instantiate(personPrefab);
         obj.transform.parent = game.transform;
-        FollowDirections follower = obj.GetComponent<FollowDirections>();
+        Follower follower = obj.GetComponent<Follower>();
 
         // The DirectionMap's goal happens to be this house's position
         DirectionMap dirs = gameObject.GetComponent<DirectionMap>();
@@ -32,7 +32,7 @@ public class Birth : MonoBehaviour {
             for(int row = 0; row < 20; ++row) {
                 for(int col = 0; col < 30; ++col) {
 					GameObject obj = Spawn();
-                    FollowDirections follower = obj.GetComponent<FollowDirections>();
+                    Follower follower = obj.GetComponent<Follower>();
                     follower.col = col;
                     follower.row = row;
                 }
@@ -40,7 +40,7 @@ public class Birth : MonoBehaviour {
         }
         if(Input.GetKeyDown(KeyCode.R)) {
             GameObject obj = Spawn();
-            FollowDirections follower = obj.GetComponent<FollowDirections>();
+            Follower follower = obj.GetComponent<Follower>();
             follower.col = Random.Range(0, 30);
             follower.row = Random.Range(0, 19);
         }

@@ -34,8 +34,8 @@ public class School : MonoBehaviour {
         GameObject person = (GameObject)Object.Instantiate(adultPrefab);
         person.transform.parent = GetComponentInParent<EduGame>().transform;
         //person.transform.parent = this.gameObject.transform;
-        FollowDirections follower = person.GetComponent<FollowDirections>();
-        follower.state = FollowDirections.State.Adult;
+        Follower follower = person.GetComponent<Follower>();
+        follower.state = Follower.State.Adult;
         follower.col = dirs.targetColumn;
         follower.row = dirs.targetRow;
         //person.transform.position = dirs.map.ColRowToWorld(dirs.targetColumn, dirs.targetRow);

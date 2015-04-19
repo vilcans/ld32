@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowDirections : MonoBehaviour {
+public class Follower : MonoBehaviour {
 
     public enum State {
         Child,
