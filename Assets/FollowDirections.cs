@@ -11,11 +11,14 @@ public class FollowDirections : MonoBehaviour {
     public DirectionMap directions;
     public int col, row;
     public State state = State.Child;
-
+    private Vector3 positionOffset;
     [Tooltip("Movement speed for cost=1")]
-    public float moveSpeed = 3.0f;
+    public float
+        moveSpeed = 3.0f;
 
     IEnumerator Start() {
+        positionOffset = new Vector3(Random.Range(-.3f, -3f), 0, Random.Range(-.3f, -3f));
+
         TileMap map = TileMap.instance;
         this.transform.position = map.ColRowToWorld(col, row);
 
@@ -32,7 +35,7 @@ public class FollowDirections : MonoBehaviour {
             if(directions.IsAtGoal(col, row)) {
                 //Debug.Log("Reached goal!");
                 GoalReached();
-				break;
+                break;
             }
             else {
                 Direction dir = directions.GetDirection(col, row).GetOpposite();
@@ -41,7 +44,7 @@ public class FollowDirections : MonoBehaviour {
                 //Debug.Log("Walking " + dir + " from " + col + "," + row + " cost " + cost);
                 map.Walk(ref col, ref row, dir);
                 Vector3 oldPos = this.transform.position;
-                Vector3 newPos = map.ColRowToWorld(col, row);
+                Vector3 newPos = map.ColRowToWorld(col, row) + new Vector3(Random.Range(-.2f, .2f), 0, Random.Range(-.2f, .2f));
                 float transitionLength = Vector3.Distance(oldPos, newPos) / moveSpeed * cost;
                 while(timeInStep < transitionLength) {
                     this.transform.position = Vector3.Lerp(oldPos, newPos, timeInStep / transitionLength);
