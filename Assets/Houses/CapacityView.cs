@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CapacityView : MonoBehaviour {
 
-    private int lastCapacity;
+    private int lastValue = int.MinValue;
     private Occupation occupation;
     private TextMesh textMesh;
 
@@ -13,10 +13,10 @@ public class CapacityView : MonoBehaviour {
 	}
 
     void Update() {
-        int capacity = occupation.GetCapacityLeft();
-        if(capacity != lastCapacity) {
-            lastCapacity = capacity;
-            this.textMesh.text = capacity.ToString();
+        int number = occupation.GetNumberOfOccupants();
+        if(number != lastValue) {
+            lastValue = number;
+            this.textMesh.text = number.ToString();
         }
     }
 }

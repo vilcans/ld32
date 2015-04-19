@@ -5,7 +5,8 @@ public class Follower : MonoBehaviour {
 
     public enum State {
         Child,
-        Adult
+        Adult,
+        Parent,
     }
 
     public DirectionMap directions;
@@ -82,23 +83,23 @@ public class Follower : MonoBehaviour {
         if(!goal.acceptedByStates.Contains(this.state)) {
             return false;
         }
-        Occupation school = goal.GetComponent<Occupation>();
-        if(school == null) {
+        Occupation occupation = goal.GetComponent<Occupation>();
+        if(occupation == null) {
             return true;
         }
-        return school.CanReceive();
+        return occupation.CanReceive();
     }
 
     private void GoalReached() {
-        Occupation school = this.directions.GetComponent<Occupation>();
-        Debug.Log(this + " reached goal; school is " + school);
-        if(school != null) {
-            if(school.CanReceive()) {
-                school.ReceivePerson();
+        Occupation occupation = this.directions.GetComponent<Occupation>();
+        Debug.Log(this + " reached goal; occupation is " + occupation);
+        if(occupation != null) {
+            if(occupation.CanReceive()) {
+                occupation.ReceivePerson();
                 Destroy(this.gameObject);
             }
             else {
-                Debug.Log("This school is full");
+                Debug.Log("This place is full");
             }
         }
     }

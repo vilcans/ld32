@@ -5,6 +5,7 @@ public class Occupation : MonoBehaviour {
 
     public float stageTime = 5.0f;
     public int capacity = 10;
+    public Follower.State nextState;
     public GameObject nextStagePrefab;
     private Queue<float> releaseTimes;
 
@@ -22,7 +23,9 @@ public class Occupation : MonoBehaviour {
         }*/
         while(releaseTimes.Count != 0 && releaseTimes.Peek() <= now) {
             releaseTimes.Dequeue();
-            SpawnAdult();
+            if(nextStagePrefab != null) {
+                SpawnNextStage();
+            }
         }
     }
 
@@ -30,21 +33,21 @@ public class Occupation : MonoBehaviour {
         return releaseTimes.Count < capacity;
     }
 
-    public int GetCapacityLeft() {
-        return capacity - releaseTimes.Count;
+    public int GetNumberOfOccupants() {
+        return releaseTimes.Count;
     }
 
     public void ReceivePerson() {
         releaseTimes.Enqueue(Time.timeSinceLevelLoad + stageTime);
     }
 
-    private void SpawnAdult() {
+    private void SpawnNextStage() {
         DirectionMap dirs = GetComponent<DirectionMap>();
         GameObject person = (GameObject)Object.Instantiate(nextStagePrefab);
         person.transform.parent = GetComponentInParent<EduGame>().transform;
         //person.transform.parent = this.gameObject.transform;
         Follower follower = person.GetComponent<Follower>();
-        follower.state = Follower.State.Adult;
+        follower.state = this.nextState;
         follower.col = dirs.targetColumn;
         follower.row = dirs.targetRow;
         //person.transform.position = dirs.map.ColRowToWorld(dirs.targetColumn, dirs.targetRow);

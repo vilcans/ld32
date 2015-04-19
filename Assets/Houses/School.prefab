@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageTime: 30
   capacity: 10
+  nextState: 1
   nextStagePrefab: {fileID: 198534, guid: 510d94378caf84385aa84ba45e05da69, type: 2}
 --- !u!114 &11471866
 MonoBehaviour:

@@ -10,6 +10,7 @@ public class TileMap : MonoBehaviour {
     public GameObject workPrefab;
     public GameObject terrorPrefab;
     public GameObject dirtPrefab;
+    public GameObject vacantPrefab;
 
     public float groundCost = 1.0f;
     public float dirtCost = 1.0f;
@@ -79,10 +80,10 @@ public class TileMap : MonoBehaviour {
             GameObject obj = (GameObject)Object.Instantiate(dirtPrefab);
             return obj;
         }
-        /*if(tileCode == 48 || tileCode == 49 || tileCode == 56 || tileCode == 57) {
-            GameObject obj = (GameObject)Object.Instantiate(dirtPrefab);
+        if(tileCode == 81) {
+            GameObject obj = (GameObject)Object.Instantiate(vacantPrefab);
             return obj;
-        }*/
+        }
         return null;
     }
 
