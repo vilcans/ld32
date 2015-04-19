@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f381a1845e4d7455297094050f32b20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenBirths: 2
+  timeBetweenBirths: 5
+  totalChildren: 3
   personPrefab: {fileID: 159326, guid: 522358faf9e804f62be1fcf2df7d4738, type: 2}
 --- !u!114 &11488846
 MonoBehaviour:
@@ -130,6 +131,7 @@ MonoBehaviour:
   targetColumn: 0
   targetRow: 0
   acceptedByStates: 
+  updatesPerFrame: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
