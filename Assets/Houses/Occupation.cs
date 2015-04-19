@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Occupation : MonoBehaviour {
 
     public float stageTime = 5.0f;
     public int capacity = 10;
+    public int minOccupancyForNextStage = 0;
+
     public Follower.State nextState;
     public GameObject nextStagePrefab;
     private Queue<float> releaseTimes;
@@ -15,12 +18,10 @@ public class Occupation : MonoBehaviour {
 
     void Update() {
         float now = Time.timeSinceLevelLoad;
-        /*if(releaseTimes.Count != 0) {
-            Debug.Log("School has " + releaseTimes.Count + " pupils, now is " + now + ", first release time is " + releaseTimes.Peek());
+
+        if(releaseTimes.Count < minOccupancyForNextStage) {
+            return;
         }
-        else {
-            //Debug.Log ("School is empty");
-        }*/
         while(releaseTimes.Count != 0 && releaseTimes.Peek() <= now) {
             releaseTimes.Dequeue();
             DirectionMap place = GetComponent<DirectionMap>();
