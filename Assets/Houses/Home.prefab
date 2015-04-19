@@ -72,7 +72,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4f1d1067919d1464d973e70238e3a98a, type: 2}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f381a1845e4d7455297094050f32b20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenBirths: 10
+  timeBetweenBirths: 2
   personPrefab: {fileID: 159326, guid: 522358faf9e804f62be1fcf2df7d4738, type: 2}
 --- !u!114 &11488846
 MonoBehaviour:

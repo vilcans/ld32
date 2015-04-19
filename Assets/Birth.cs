@@ -28,7 +28,7 @@ public class Birth : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.A)) {
+        if(Input.GetKeyDown(KeyCode.Return)) {
             for(int row = 0; row < 20; ++row) {
                 for(int col = 0; col < 30; ++col) {
 					GameObject obj = Spawn();

@@ -89,6 +89,9 @@ public class TileMap : MonoBehaviour {
     public Vector3 ColRowToWorld(int col, int row) {
         return new Vector3(col - width * .5f, 0, height * .5f - row);
     }
+    public Vector3 ColRowToWorld(int col, int row, Vector3 pivotPoint) {
+        return ColRowToWorld(col, row) + pivotPoint;
+    }
 
     public void WorldToColRow(Vector3 pos, out int col, out int row) {
         col = Mathf.FloorToInt(pos.x + width * .5f);
