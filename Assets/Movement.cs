@@ -38,21 +38,24 @@ public class Movement : MonoBehaviour {
         int newCol = column;
         int newRow = row;
         map.Walk(ref newCol, ref newRow, newDirection);
-        if (!map.IsInBounds (newCol, newRow)) {
-			yield return null;
-		}
+        if(!map.IsInBounds(newCol, newRow)) {
+            yield return null;
+        }
         else {
+            byte oldTileType = map.GetTile(column, row);
             byte tileType = map.GetTile(newCol, newRow);
             float cost = map.GetCost(tileType);
             if(cost == Mathf.Infinity) {
                 Debug.Log("Can't go " + newDirection + " into " + tileType);
-				yield return null;
-			}
+                yield return null;
+            }
             else {
                 Debug.Log("Moving " + newDirection);
                 Vector3 newPos = map.ColRowToWorld(newCol, newRow, pivotPoint);
                 Vector3 oldPos = this.transform.position;
-                float transitionTime = Vector3.Distance(oldPos, newPos) * cost / this.speed;
+                float oldCost = map.GetCost(oldTileType);
+                float mixedCost = cost * .5f + oldCost * .5f;
+                float transitionTime = Vector3.Distance(oldPos, newPos) * mixedCost / this.speed;
                 float t = 0;
                 while(t < transitionTime) {
                     this.transform.position = Vector3.Lerp(oldPos, newPos, t / transitionTime);
