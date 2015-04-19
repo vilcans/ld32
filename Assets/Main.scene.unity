@@ -345,7 +345,7 @@ MonoBehaviour:
   workPrefab: {fileID: 141022, guid: be39fa53f73904a5a91f1908e24912dc, type: 2}
   terrorPrefab: {fileID: 114258, guid: 717d8eed673234f2a8e098bcf2de0898, type: 2}
   dirtPrefab: {fileID: 186952, guid: 96ddfdd78e754473bb11d623f84dd59f, type: 2}
-  groundCost: 5
+  groundCost: 3
   dirtCost: 1
   insideCost: 1
   shrinkObjects: 0
