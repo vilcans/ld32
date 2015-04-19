@@ -5,14 +5,8 @@ public class FollowPlayer : MonoBehaviour {
 
     public Transform target;
     
-    void Update() {
+    void LateUpdate() {
         Vector3 my = this.gameObject.transform.position;
         this.transform.position = new Vector3(target.position.x, my.y, my.z);
-
-        /* = new Vector3(
-            target.x,
-            my.x,
-            my.y
-        );*/
     }
 }
