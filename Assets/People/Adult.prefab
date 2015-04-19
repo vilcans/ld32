@@ -70,7 +70,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 63d5e53d258ea44f1841f9c51a9adc31, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -96,12 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e84ef83e6ce04ce0b37882954a914f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directions: {fileID: 0}
+  goal: {fileID: 0}
   col: 0
   row: 0
   state: 0
   moveSpeed: 2
   contemplatingTime: 2
+  retryDelay: .100000001
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
