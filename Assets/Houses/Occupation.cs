@@ -23,6 +23,11 @@ public class Occupation : MonoBehaviour {
         }*/
         while(releaseTimes.Count != 0 && releaseTimes.Peek() <= now) {
             releaseTimes.Dequeue();
+            DirectionMap place = GetComponent<DirectionMap>();
+            BuildHouse buildHouse = GetComponent<BuildHouse>();
+            if(buildHouse != null) {
+                buildHouse.Execute(place.targetColumn, place.targetRow);
+            }
             if(nextStagePrefab != null) {
                 SpawnNextStage();
             }

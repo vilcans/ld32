@@ -260,6 +260,7 @@ MonoBehaviour:
   state: 0
   moveSpeed: 2
   contemplatingTime: 2
+  retryDelay: .100000001
 --- !u!4 &570634701
 Transform:
   m_ObjectHideFlags: 0

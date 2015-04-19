@@ -18,6 +18,9 @@ public class Follower : MonoBehaviour {
 
     public float contemplatingTime = 2.0f;
 
+    // Time to wait after reaching goal but discovering it was occupied
+    public float retryDelay = .1f;
+
     private int stepsTaken;
 
     IEnumerator Start() {
@@ -45,7 +48,7 @@ public class Follower : MonoBehaviour {
             if(goal.IsAtGoal(col, row)) {
                 //Debug.Log("Reached goal!");
                 GoalReached();
-                break;
+                yield return new WaitForSeconds(retryDelay);
             }
             else {
                 Direction dir = goal.GetDirection(col, row).GetOpposite();
