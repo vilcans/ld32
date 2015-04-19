@@ -3,12 +3,12 @@ using System.Collections;
 
 public class TimeShift : MonoBehaviour {
 
-    public bool fast = false;
-
     void Update () {
-        if(Input.GetKeyDown(KeyCode.Alpha0)) {
-            this.fast = !this.fast;
-            Time.timeScale = fast ? 5 : 1;
+        if(Input.GetKey(KeyCode.Alpha0)) {
+            Time.timeScale = 5;
+        }
+        else {
+            Time.timeScale = 1;
         }
 	}
 }
