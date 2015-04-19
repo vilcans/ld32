@@ -9,7 +9,7 @@ public class Follower : MonoBehaviour {
         Parent,
     }
 
-    public DirectionMap directions;
+    public DirectionMap goal;
     public int col, row;
     public State state = State.Child;
     [Tooltip("Movement speed for cost=1")]
@@ -31,20 +31,20 @@ public class Follower : MonoBehaviour {
                 // Step out and stop to think about next move
                 yield return new WaitForSeconds(contemplatingTime);
             }
-            while(directions == null) {
+            while(goal == null) {
                 yield return null;
             }
             if(!map.IsInBounds(col, row)) {
                 Debug.LogError("Out of bounds at " + col + "," + row);
                 break;
             }
-            if(directions.IsAtGoal(col, row)) {
+            if(goal.IsAtGoal(col, row)) {
                 //Debug.Log("Reached goal!");
                 GoalReached();
                 break;
             }
             else {
-                Direction dir = directions.GetDirection(col, row).GetOpposite();
+                Direction dir = goal.GetDirection(col, row).GetOpposite();
                 byte tileType = map.GetTile(col, row);
                 float cost = map.GetCost(tileType);
                 //Debug.Log("Walking " + dir + " from " + col + "," + row + " cost " + cost);
@@ -64,19 +64,19 @@ public class Follower : MonoBehaviour {
         } while(true);
     }
 
-    public void ChooseDirection(DirectionMap[] directions) {
+    public void ChooseGoal(DirectionMap[] goals) {
         float lowestCost = Mathf.Infinity;
-        foreach(DirectionMap m in directions) {
+        foreach(DirectionMap m in goals) {
             if(!IsAcceptableGoal(m)) {
                 continue;
             }
             float cost = m.GetCostToGoal(this.col, this.row);
             if(cost < lowestCost) {
                 lowestCost = cost;
-                this.directions = m;
+                this.goal = m;
             }
         }
-        //Debug.Log(this.state + " found best goal: " + this.directions + " cost " + lowestCost);
+        //Debug.Log(this.state + " found best goal: " + this.goal + " cost " + lowestCost);
     }
 
     public bool IsAcceptableGoal(DirectionMap goal) {
@@ -91,7 +91,7 @@ public class Follower : MonoBehaviour {
     }
 
     private void GoalReached() {
-        Occupation occupation = this.directions.GetComponent<Occupation>();
+        Occupation occupation = this.goal.GetComponent<Occupation>();
         Debug.Log(this + " reached goal; occupation is " + occupation);
         if(occupation != null) {
             if(occupation.CanReceive()) {
