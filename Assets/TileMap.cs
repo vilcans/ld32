@@ -132,6 +132,7 @@ public class TileMap : MonoBehaviour {
         case 20:
         case 41:
         case 44:
+        case 81:
             return insideCost;
         default:
 			return Mathf.Infinity;
