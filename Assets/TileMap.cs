@@ -36,11 +36,10 @@ public class TileMap : MonoBehaviour {
             for(int col = 0; col < width; ++col) {
                 int index = row * width + col;
                 byte tileCode = tileData[index];
-                GameObject obj = CreateObject(tileCode);
+                GameObject obj = CreateObject(tileCode, col, row);
                 if(obj == null) {
                     continue;
                 }
-                obj.transform.parent = this.gameObject.transform;
                 obj.transform.position = ColRowToWorld(col, row);
                 if(shrinkObjects) {
                     obj.transform.localScale = new Vector3(1, .1f, 1);
@@ -56,35 +55,34 @@ public class TileMap : MonoBehaviour {
         }
     }
 
-    public GameObject CreateObject(byte tileCode) {
-        if(tileCode == 17) {
-            GameObject obj = (GameObject)Object.Instantiate(homePrefab);
-            obj.name = "Home";
-            return obj;
+    public GameObject CreateObject(byte tileCode, int col, int row) {
+        GameObject prefab = GetPrefab(tileCode);
+        if(prefab == null) {
+            return null;
         }
-        if(tileCode == 20) {
-            GameObject obj = (GameObject)Object.Instantiate(schoolPrefab);
-            obj.name = "School";
-            return obj;
+        GameObject obj = (GameObject)Object.Instantiate(prefab);
+        obj.transform.parent = this.gameObject.transform;
+        obj.transform.position = ColRowToWorld(col, row);
+        return obj;
+    }
+
+    private GameObject GetPrefab(byte tileCode) {
+        switch(tileCode) {
+        case 17:
+            return homePrefab;
+        case 20:
+            return schoolPrefab;
+        case 41:
+            return workPrefab;
+        case 44:
+            return terrorPrefab;
+        case 50:
+            return dirtPrefab;
+        case 81:
+            return vacantPrefab;
+        default:
+            return null;
         }
-        if(tileCode == 41) {
-            GameObject obj = (GameObject)Object.Instantiate(workPrefab);
-            obj.name = "Work";
-            return obj;
-        }
-        if(tileCode == 44) {
-            GameObject obj = (GameObject)Object.Instantiate(terrorPrefab);
-            return obj;
-        }
-        if(tileCode == 50) {
-            GameObject obj = (GameObject)Object.Instantiate(dirtPrefab);
-            return obj;
-        }
-        if(tileCode == 81) {
-            GameObject obj = (GameObject)Object.Instantiate(vacantPrefab);
-            return obj;
-        }
-        return null;
     }
 
     public Vector3 ColRowToWorld(int col, int row) {

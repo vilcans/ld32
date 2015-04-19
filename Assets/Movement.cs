@@ -102,8 +102,7 @@ public class Movement : MonoBehaviour {
     }
 
     void CreateRoad(int col, int row) {
-        GameObject obj = map.CreateObject(50);
-        obj.transform.position = map.ColRowToWorld(col, row);
+        map.CreateObject(50, col, row);
         map.SetTile(col, row, 50);
     }
 }
