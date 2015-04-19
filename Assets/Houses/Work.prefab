@@ -16,19 +16,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &141024
+--- !u!1 &160460
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 441024}
-  - 33: {fileID: 3341024}
-  - 23: {fileID: 2341024}
-  - 95: {fileID: 9541024}
+  - 4: {fileID: 460460}
+  - 33: {fileID: 3360460}
+  - 23: {fileID: 2360460}
   m_Layer: 0
-  m_Name: school
+  m_Name: work
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,27 +43,27 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 441024}
+  - {fileID: 460460}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!4 &441024
+--- !u!4 &460460
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141024}
+  m_GameObject: {fileID: 160460}
   m_LocalRotation: {x: -4.32977997e-17, y: .707106709, z: .707106829, w: -4.32978063e-17}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 441022}
   m_RootOrder: 0
---- !u!23 &2341024
+--- !u!23 &2360460
 Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141024}
+  m_GameObject: {fileID: 160460}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -79,28 +78,13 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3341024
+--- !u!33 &3360460
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141024}
-  m_Mesh: {fileID: 4300000, guid: d2c7b305e7bf94e4f95b71ed7f14cb7c, type: 3}
---- !u!95 &9541024
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141024}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d2c7b305e7bf94e4f95b71ed7f14cb7c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_GameObject: {fileID: 160460}
+  m_Mesh: {fileID: 4300000, guid: 538df127ea3ef43ef95af9614be5869c, type: 3}
 --- !u!114 &11483980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,6 +100,7 @@ MonoBehaviour:
   targetColumn: 0
   targetRow: 0
   acceptedByStates: 01000000
+  updatesPerFrame: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

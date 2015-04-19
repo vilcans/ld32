@@ -178,10 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536528a87bb974bdd971b5477cd32ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  column: 14
-  row: 6
+  column: 27
+  row: 7
   direction: 0
-  speed: 10
+  speed: 6
 --- !u!1001 &400339017
 Prefab:
   m_ObjectHideFlags: 0
