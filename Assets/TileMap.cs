@@ -40,16 +40,6 @@ public class TileMap : MonoBehaviour {
                 if(obj == null) {
                     continue;
                 }
-                obj.transform.position = ColRowToWorld(col, row);
-                if(shrinkObjects) {
-                    obj.transform.localScale = new Vector3(1, .1f, 1);
-                }
-                DirectionMap directionMap = obj.GetComponent<DirectionMap>();
-                if(directionMap != null) {
-                    directionMap.map = this;
-                    directionMap.targetColumn = col;
-                    directionMap.targetRow = row;
-                }
                 Debug.Log("Instantiated " + obj.name + " at col " + col + " row " + row + " " + obj.transform.position);
             }
         }
@@ -63,6 +53,15 @@ public class TileMap : MonoBehaviour {
         GameObject obj = (GameObject)Object.Instantiate(prefab);
         obj.transform.parent = this.gameObject.transform;
         obj.transform.position = ColRowToWorld(col, row);
+        if(shrinkObjects) {
+            obj.transform.localScale = new Vector3(1, .1f, 1);
+        }
+        DirectionMap directionMap = obj.GetComponent<DirectionMap>();
+        if(directionMap != null) {
+            directionMap.map = this;
+            directionMap.targetColumn = col;
+            directionMap.targetRow = row;
+        }
         return obj;
     }
 

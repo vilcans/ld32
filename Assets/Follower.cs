@@ -22,6 +22,10 @@ public class Follower : MonoBehaviour {
 
     IEnumerator Start() {
         TileMap map = TileMap.instance;
+        while(map == null) {
+            yield return null;
+            map = TileMap.instance;
+        }
         this.transform.position = map.ColRowToWorld(col, row);
 
         float timeInStep = 0;
@@ -80,10 +84,14 @@ public class Follower : MonoBehaviour {
     }
 
     public bool IsAcceptableGoal(DirectionMap goal) {
+        if(!goal) {
+            //Debug.LogWarning("Goal seems to be gone");
+            return false;
+        }
         if(!goal.acceptedByStates.Contains(this.state)) {
             return false;
         }
-        Occupation occupation = goal.GetComponent<Occupation>();
+        Occupation occupation = goal.gameObject.GetComponent<Occupation>();
         if(occupation == null) {
             return true;
         }
