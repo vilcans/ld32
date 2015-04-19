@@ -75,6 +75,92 @@ NavMeshSettings:
     heightInaccuracy: 10
     tileSizeHint: 0
   m_NavMesh: {fileID: 0}
+--- !u!1 &56812529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 56812530}
+  - 82: {fileID: 56812531}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56812530
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 56812529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1422719698}
+  m_RootOrder: 0
+--- !u!82 &56812531
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 56812529}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: fbf18c7779180471489436e9f18025b9, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: .660000026
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &131431953
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,8 +424,8 @@ GameObject:
   - 114: {fileID: 1422719697}
   - 114: {fileID: 1422719699}
   - 114: {fileID: 1422719700}
-  - 82: {fileID: 1422719701}
   - 114: {fileID: 1422719702}
+  - 114: {fileID: 1422719701}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -379,7 +465,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.524273396, y: 1.02293491, z: -2.57897758}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 56812530}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!114 &1422719699
@@ -407,64 +494,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfTerrorists: 0
   state: 0
---- !u!82 &1422719701
-AudioSource:
+--- !u!114 &1422719701
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1422719696}
   m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: fbf18c7779180471489436e9f18025b9, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3526e667e0445f28d28e061aca0a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnClips:
+  - {fileID: 8300000, guid: 3ebe223f364df48a8a9016e05e938192, type: 3}
+  - {fileID: 8300000, guid: 30bad0605d7ae49909bcc409f47a497e, type: 3}
+  - {fileID: 8300000, guid: 6f7bbc5172bc44f21a84fe167d37ee17, type: 3}
+  - {fileID: 0}
+  secondSpawnClips:
+  - {fileID: 8300000, guid: 17ed7b6d2f0914e32aa1394a7e005d60, type: 3}
+  - {fileID: 8300000, guid: 41ca4236b6a80468e85f0cda766f69cb, type: 3}
+  - {fileID: 8300000, guid: 652d2622c381245148429b7e9c64b36d, type: 3}
+  - {fileID: 0}
 --- !u!114 &1422719702
 MonoBehaviour:
   m_ObjectHideFlags: 0

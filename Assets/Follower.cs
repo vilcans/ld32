@@ -23,6 +23,7 @@ public class Follower : MonoBehaviour {
     public float retryDelay = .1f;
 
     private int stepsTaken;
+    private bool dying = false;
 
     IEnumerator Start() {
         TileMap map = TileMap.instance;
@@ -33,6 +34,7 @@ public class Follower : MonoBehaviour {
         this.transform.position = map.ColRowToWorld(col, row);
 
         float timeInStep = 0;
+        GetComponentInParent<Sounds>().PlaySpawn(this);
 
         do {
             if(stepsTaken == 1) {
@@ -69,7 +71,7 @@ public class Follower : MonoBehaviour {
                 this.transform.position = newPos;
                 ++stepsTaken;
             }
-        } while(true);
+        } while(!dying);
     }
 
     public void ChooseGoal(DirectionMap[] goals) {
@@ -108,11 +110,18 @@ public class Follower : MonoBehaviour {
         if(occupation != null) {
             if(occupation.CanReceive()) {
                 occupation.ReceivePerson();
-                Destroy(this.gameObject);
+                // Delay to allow audio to finish
+                this.dying = true;
+                StartCoroutine(DelayedDestroy());
             }
             else {
                 Debug.Log("This place is full");
             }
         }
+    }
+
+    private IEnumerator DelayedDestroy() {
+        yield return new WaitForSeconds(8);
+        Destroy(this.gameObject);
     }
 }
