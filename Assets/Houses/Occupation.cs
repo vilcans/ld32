@@ -9,7 +9,7 @@ public class Occupation : MonoBehaviour {
     private Queue<float> releaseTimes;
 
     void Start() {
-        releaseTimes = new Queue<float>();    
+        releaseTimes = new Queue<float>();
     }
 
     void Update() {
@@ -28,6 +28,10 @@ public class Occupation : MonoBehaviour {
 
     public bool CanReceive() {
         return releaseTimes.Count < capacity;
+    }
+
+    public int GetCapacityLeft() {
+        return capacity - releaseTimes.Count;
     }
 
     public void ReceivePerson() {
