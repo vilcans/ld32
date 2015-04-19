@@ -73,7 +73,7 @@ public class Follower : MonoBehaviour {
         if(!goal.acceptedByStates.Contains(this.state)) {
             return false;
         }
-        School school = goal.GetComponent<School>();
+        Occupation school = goal.GetComponent<Occupation>();
         if(school == null) {
             return true;
         }
@@ -81,7 +81,7 @@ public class Follower : MonoBehaviour {
     }
 
     private void GoalReached() {
-        School school = this.directions.GetComponent<School>();
+        Occupation school = this.directions.GetComponent<Occupation>();
         Debug.Log(this + " reached goal; school is " + school);
         if(school != null) {
             if(school.CanReceive()) {

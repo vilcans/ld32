@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class School : MonoBehaviour {
+public class Occupation : MonoBehaviour {
 
     public float stageTime = 5.0f;
     public int capacity = 10;
-    public GameObject adultPrefab;
+    public GameObject nextStagePrefab;
     private Queue<float> releaseTimes;
 
     void Start() {
@@ -36,7 +36,7 @@ public class School : MonoBehaviour {
 
     private void SpawnAdult() {
         DirectionMap dirs = GetComponent<DirectionMap>();
-        GameObject person = (GameObject)Object.Instantiate(adultPrefab);
+        GameObject person = (GameObject)Object.Instantiate(nextStagePrefab);
         person.transform.parent = GetComponentInParent<EduGame>().transform;
         //person.transform.parent = this.gameObject.transform;
         Follower follower = person.GetComponent<Follower>();
@@ -44,6 +44,6 @@ public class School : MonoBehaviour {
         follower.col = dirs.targetColumn;
         follower.row = dirs.targetRow;
         //person.transform.position = dirs.map.ColRowToWorld(dirs.targetColumn, dirs.targetRow);
-        Debug.Log("Spawned adult " + person);
+        Debug.Log("Spawned " + person);
     }
 }
