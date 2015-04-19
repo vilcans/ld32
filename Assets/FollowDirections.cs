@@ -11,14 +11,12 @@ public class FollowDirections : MonoBehaviour {
     public DirectionMap directions;
     public int col, row;
     public State state = State.Child;
-    private Vector3 positionOffset;
+
     [Tooltip("Movement speed for cost=1")]
     public float
         moveSpeed = 3.0f;
 
     IEnumerator Start() {
-        positionOffset = new Vector3(Random.Range(-.3f, -3f), 0, Random.Range(-.3f, -3f));
-
         TileMap map = TileMap.instance;
         this.transform.position = map.ColRowToWorld(col, row);
 
