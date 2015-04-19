@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536528a87bb974bdd971b5477cd32ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  column: 27
+  column: 59
   row: 7
   direction: 0
   speed: 6
