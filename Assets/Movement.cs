@@ -51,6 +51,9 @@ public class Movement : MonoBehaviour {
             }
             else {
                 Debug.Log("Moving " + newDirection);
+                if(map.IsModifiable(tileType)) {
+                    CreateRoad(newCol, newRow);
+                }
                 Vector3 newPos = map.ColRowToWorld(newCol, newRow, pivotPoint);
                 Vector3 oldPos = this.transform.position;
                 float oldCost = map.GetCost(oldTileType);
@@ -96,5 +99,11 @@ public class Movement : MonoBehaviour {
         }
         dir = Direction.Left;
         return false;
+    }
+
+    void CreateRoad(int col, int row) {
+        GameObject obj = map.CreateObject(50);
+        obj.transform.position = map.ColRowToWorld(col, row);
+        map.SetTile(col, row, 50);
     }
 }

@@ -55,7 +55,7 @@ public class TileMap : MonoBehaviour {
         }
     }
 
-    GameObject CreateObject(byte tileCode) {
+    public GameObject CreateObject(byte tileCode) {
         if(tileCode == 17) {
             GameObject obj = (GameObject)Object.Instantiate(homePrefab);
             obj.name = "Home";
@@ -110,6 +110,14 @@ public class TileMap : MonoBehaviour {
         return tileData[GetIndex(col, row)];
     }
 
+    public void SetTile(int col, int row, byte tile) {
+        int index = GetIndex(col, row);
+        if(tileData[index] == tile) {
+            return;
+        }
+        tileData[index] = tile;
+    }
+
     public float GetCost(byte tileType) {
         switch(tileType) {
         case 48:
@@ -124,6 +132,10 @@ public class TileMap : MonoBehaviour {
         default:
 			return Mathf.Infinity;
         }
+    }
+
+    public bool IsModifiable(byte tileType) {
+        return tileType == 48;
     }
 
     public int GetIndex(int col, int row) {
