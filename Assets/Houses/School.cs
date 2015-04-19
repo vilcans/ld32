@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class School : MonoBehaviour {
 
     public float stageTime = 5.0f;
+    public int capacity = 10;
     public GameObject adultPrefab;
     private Queue<float> releaseTimes;
 
@@ -23,6 +24,10 @@ public class School : MonoBehaviour {
             releaseTimes.Dequeue();
             SpawnAdult();
         }
+    }
+
+    public bool CanReceive() {
+        return releaseTimes.Count < capacity;
     }
 
     public void ReceivePerson() {

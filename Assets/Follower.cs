@@ -11,7 +11,6 @@ public class Follower : MonoBehaviour {
     public DirectionMap directions;
     public int col, row;
     public State state = State.Child;
-
     [Tooltip("Movement speed for cost=1")]
     public float
         moveSpeed = 3.0f;
@@ -71,15 +70,27 @@ public class Follower : MonoBehaviour {
     }
 
     public bool IsAcceptableGoal(DirectionMap goal) {
-        return goal.acceptedByStates.Contains(this.state);
+        if(!goal.acceptedByStates.Contains(this.state)) {
+            return false;
+        }
+        School school = goal.GetComponent<School>();
+        if(school == null) {
+            return true;
+        }
+        return school.CanReceive();
     }
 
     private void GoalReached() {
-        Destroy(this.gameObject);
         School school = this.directions.GetComponent<School>();
         Debug.Log(this + " reached goal; school is " + school);
         if(school != null) {
-            school.ReceivePerson();
+            if(school.CanReceive()) {
+                school.ReceivePerson();
+                Destroy(this.gameObject);
+            }
+            else {
+                Debug.Log("This school is full");
+            }
         }
     }
 }
