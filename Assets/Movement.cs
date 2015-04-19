@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour {
                 yield return null;
             }
             else {
-                Debug.Log("Moving " + newDirection);
+                Debug.Log("Moving " + newDirection + " to " + newCol + "," + newRow);
                 if(map.IsModifiable(tileType)) {
                     CreateRoad(newCol, newRow);
                 }

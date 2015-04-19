@@ -30,7 +30,7 @@ public class FollowDirections : MonoBehaviour {
                 break;
             }
             if(directions.IsAtGoal(col, row)) {
-                Debug.Log("Reached goal!");
+                //Debug.Log("Reached goal!");
                 Destroy(this.gameObject);
 				break;
             }

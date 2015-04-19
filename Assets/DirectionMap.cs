@@ -7,6 +7,7 @@ public class DirectionMap : MonoBehaviour {
     public int targetColumn;
     public int targetRow;
     public List<FollowDirections.State> acceptedByStates;
+    public int updatesPerFrame = 50;
 
     private struct PathItem {
         public int col;
@@ -23,20 +24,43 @@ public class DirectionMap : MonoBehaviour {
             this.cost = cost;
         }
     };
-    
+
+    private Queue<PathItem> path;
+
     // Costs to move to this object from every position on the map
     private float[] costs;
     private Direction[] directions;
 
     void Start() {
         Debug.Log("Starting " + this.name);
+        path = new Queue<PathItem>();
         costs = new float[map.width * map.height];
         directions = new Direction[map.width * map.height];
-        for(var i = 0; i < map.NumberOfIndices; ++i) {
-            costs[i] = Mathf.Infinity;
-        }
+        Clear();
         UpdateMap();
         Print();
+    }
+
+    void Clear() {
+        for(var i = 0; i < map.NumberOfIndices; ++i) {
+            costs[i] = Mathf.Infinity;
+            directions[i] = Direction.Left;
+        }
+    }
+
+    void Update() {
+        if(path == null) {
+            throw new System.ApplicationException("path is null in " + this);
+        }
+        if(path.Count != 0) {
+            Debug.Log(this + " Path queue " + path.Count);
+            for(int i = 0; i < updatesPerFrame && path.Count != 0; ++i) {
+                UpdateOneStep();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.P)) {
+            Print();
+        }
     }
 
 	public bool IsAtGoal(int col, int row) {
@@ -51,44 +75,83 @@ public class DirectionMap : MonoBehaviour {
         return costs[map.GetIndex(col, row)];
     }
 
+    public void TileChanged(int col, int row) {
+        int index = map.GetIndex(col, row);
+        //costs[index] = Mathf.Infinity;
+        //Clear();
+        //UpdateMap();
+        float bestCost = Mathf.Infinity;
+        Direction bestDirection = Direction.Left;
+        foreach(Direction dir in System.Enum.GetValues(typeof(Direction))) {
+            int newCol = col;
+            int newRow = row;
+            map.Walk(ref newCol, ref newRow, dir);
+            if(!map.IsInBounds(newCol, newRow)) {
+                //Debug.Log("Out of bounds: " + newCol + " " + newRow);
+                continue;
+            }
+            float costInDirection = costs[map.GetIndex(newCol, newRow)];
+            if(costInDirection < bestCost) {
+                bestCost = costInDirection;
+                bestDirection = dir;
+            }
+        }
+        Debug.Log("Best cost from " + col + "," + row + " is " + bestCost + " in direction " + bestDirection);
+        costs[index] = bestCost + map.GetCost(map.GetTile(col, row));
+        directions[index] = bestDirection.GetOpposite();
+        UpdateAroundTile(col, row, costs[index]);
+    }
+
     public void UpdateMap() {
-        Queue<PathItem> path = new Queue<PathItem>();
         path.Enqueue(new PathItem(targetColumn, targetRow, Direction.Left, 0));
 
         int iterations = 0;
         while(path.Count != 0) {
-            if(++iterations > 100000) {
-                Print();
-                throw new System.ApplicationException ("Too many iterations");
-            }
-
-            PathItem item = path.Dequeue();
-            int index = map.GetIndex(item.col, item.row);
-            float oldCost = costs[index];
-            if(oldCost <= item.cost) {
-                //Debug.Log("didn't beat cost " + oldCost + " with " + item);
-                continue;
-            }
-            costs[index] = item.cost;
-            directions[index] = item.fromDirection;
-            //Debug.Log("Update map " + item);
-            foreach (Direction dir in System.Enum.GetValues(typeof(Direction))) {
-                int newCol = item.col;
-                int newRow = item.row;
-                map.Walk(ref newCol, ref newRow, dir);
-                if(!map.IsInBounds(newCol, newRow)) {
-                    //Debug.Log("Out of bounds: " + newCol + " " + newRow);
-                    continue;
-                }
-                float newCost = item.cost + map.GetCost(map.GetTile(newCol, newRow));
-                PathItem newItem = new PathItem(newCol, newRow, dir, newCost);
-                path.Enqueue(newItem);
-            }
+            UpdateOneStep();
+            ++iterations;
         }
         Debug.Log("Direction map updated in " + iterations + " iterations");
     }
 
+    private void UpdateOneStep() {
+        if(path.Count == 0) {
+            return;
+        }
+
+        PathItem item = path.Dequeue();
+        int index = map.GetIndex(item.col, item.row);
+        float oldCost = costs[index];
+        if(oldCost <= item.cost) {
+            //Debug.Log("didn't beat cost " + oldCost + " with " + item);
+            return;
+        }
+        costs[index] = item.cost;
+        directions[index] = item.fromDirection;
+        //Debug.Log("Update map " + item);
+        UpdateAroundTile(item.col, item.row, item.cost);
+
+        return;
+    }
+
+    private void UpdateAroundTile(int col, int row, float tileCost) {
+        foreach(Direction dir in System.Enum.GetValues(typeof(Direction))) {
+            int newCol = col;
+            int newRow = row;
+            map.Walk(ref newCol, ref newRow, dir);
+            if(!map.IsInBounds(newCol, newRow)) {
+                //Debug.Log("Out of bounds: " + newCol + " " + newRow);
+                continue;
+            }
+            float newCost = tileCost + map.GetCost(map.GetTile(newCol, newRow));
+            if(costs[map.GetIndex(newCol, newRow)] > newCost) {
+                PathItem newItem = new PathItem(newCol, newRow, dir, newCost);
+                path.Enqueue(newItem);
+            }
+        }
+    }
+
     public void Print() {
+        Debug.Log("Direction map " + this);
         for(int row = 0; row < map.height; ++row) {
             System.Text.StringBuilder s = new System.Text.StringBuilder();
             s.AppendFormat("{0,-3}: ", row);

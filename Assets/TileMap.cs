@@ -116,6 +116,9 @@ public class TileMap : MonoBehaviour {
             return;
         }
         tileData[index] = tile;
+        foreach(DirectionMap dirMap in GetComponentsInChildren<DirectionMap>()) {
+            dirMap.TileChanged(col, row);
+        }
     }
 
     public float GetCost(byte tileType) {
