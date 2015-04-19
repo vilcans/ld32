@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599c88e9136c84e05aa72185b7625137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageTime: 10
+  stageTime: 0
   capacity: 1
   nextState: 2
   nextStagePrefab: {fileID: 0}
