@@ -1,0 +1,44 @@
+﻿using UnityEngine;
+using System.Collections.Generic;
+
+public class School : MonoBehaviour {
+
+    public float stageTime = 5.0f;
+    public GameObject adultPrefab;
+    private Queue<float> releaseTimes;
+
+    void Start() {
+        releaseTimes = new Queue<float>();    
+    }
+
+    void Update() {
+        float now = Time.timeSinceLevelLoad;
+        /*if(releaseTimes.Count != 0) {
+            Debug.Log("School has " + releaseTimes.Count + " pupils, now is " + now + ", first release time is " + releaseTimes.Peek());
+        }
+        else {
+            //Debug.Log ("School is empty");
+        }*/
+        while(releaseTimes.Count != 0 && releaseTimes.Peek() <= now) {
+            releaseTimes.Dequeue();
+            SpawnAdult();
+        }
+    }
+
+    public void ReceivePerson() {
+        releaseTimes.Enqueue(Time.timeSinceLevelLoad + stageTime);
+    }
+
+    private void SpawnAdult() {
+        DirectionMap dirs = GetComponent<DirectionMap>();
+        GameObject person = (GameObject)Object.Instantiate(adultPrefab);
+        person.transform.parent = GetComponentInParent<EduGame>().transform;
+        //person.transform.parent = this.gameObject.transform;
+        FollowDirections follower = person.GetComponent<FollowDirections>();
+        follower.state = FollowDirections.State.Adult;
+        follower.col = dirs.targetColumn;
+        follower.row = dirs.targetRow;
+        //person.transform.position = dirs.map.ColRowToWorld(dirs.targetColumn, dirs.targetRow);
+        Debug.Log("Spawned adult " + person);
+    }
+}

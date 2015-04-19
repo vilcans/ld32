@@ -50,10 +50,11 @@ public class DirectionMap : MonoBehaviour {
 
     void Update() {
         if(path == null) {
-            throw new System.ApplicationException("path is null in " + this);
+            Debug.LogWarning("path is null in " + this);
+            path = new Queue<PathItem>();
         }
         if(path.Count != 0) {
-            Debug.Log(this + " Path queue " + path.Count);
+            //Debug.Log(this + " Path queue " + path.Count);
             for(int i = 0; i < updatesPerFrame && path.Count != 0; ++i) {
                 UpdateOneStep();
             }

@@ -31,7 +31,7 @@ public class FollowDirections : MonoBehaviour {
             }
             if(directions.IsAtGoal(col, row)) {
                 //Debug.Log("Reached goal!");
-                Destroy(this.gameObject);
+                GoalReached();
 				break;
             }
             else {
@@ -71,5 +71,14 @@ public class FollowDirections : MonoBehaviour {
 
     public bool IsAcceptableGoal(DirectionMap goal) {
         return goal.acceptedByStates.Contains(this.state);
+    }
+
+    private void GoalReached() {
+        Destroy(this.gameObject);
+        School school = this.directions.GetComponent<School>();
+        Debug.Log(this + " reached goal; school is " + school);
+        if(school != null) {
+            school.ReceivePerson();
+        }
     }
 }
