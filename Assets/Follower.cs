@@ -15,6 +15,10 @@ public class Follower : MonoBehaviour {
     public float
         moveSpeed = 3.0f;
 
+    public float contemplatingTime = 2.0f;
+
+    private int stepsTaken;
+
     IEnumerator Start() {
         TileMap map = TileMap.instance;
         this.transform.position = map.ColRowToWorld(col, row);
@@ -22,6 +26,10 @@ public class Follower : MonoBehaviour {
         float timeInStep = 0;
 
         do {
+            if(stepsTaken == 1) {
+                // Step out and stop to think about next move
+                yield return new WaitForSeconds(contemplatingTime);
+            }
             while(directions == null) {
                 yield return null;
             }
@@ -50,6 +58,7 @@ public class Follower : MonoBehaviour {
                 }
                 timeInStep -= transitionLength;
                 this.transform.position = newPos;
+                ++stepsTaken;
             }
         } while(true);
     }

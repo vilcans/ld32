@@ -101,6 +101,7 @@ MonoBehaviour:
   row: 0
   state: 0
   moveSpeed: 2
+  contemplatingTime: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
