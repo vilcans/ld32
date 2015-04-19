@@ -38,7 +38,7 @@ public class DirectionMap : MonoBehaviour {
         directions = new Direction[map.width * map.height];
         Clear();
         UpdateMap();
-        Print();
+        //Print();
     }
 
     void Clear() {
@@ -106,12 +106,12 @@ public class DirectionMap : MonoBehaviour {
     public void UpdateMap() {
         path.Enqueue(new PathItem(targetColumn, targetRow, Direction.Left, 0));
 
-        int iterations = 0;
+        /*int iterations = 0;
         while(path.Count != 0) {
             UpdateOneStep();
             ++iterations;
         }
-        Debug.Log("Direction map updated in " + iterations + " iterations");
+        Debug.Log("Direction map updated in " + iterations + " iterations");*/
     }
 
     private void UpdateOneStep() {
