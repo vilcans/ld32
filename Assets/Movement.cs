@@ -73,30 +73,22 @@ public class Movement : MonoBehaviour {
     }
 
     public static bool GetNewDirection(out Direction dir) {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        float absH = Mathf.Abs(horizontal);
-        float absV = Mathf.Abs(vertical);
-        if(absH > absV) {
-            if(horizontal < 0) {
-                dir = Direction.Left;
-                return true;
-            }
-            if(horizontal > 0) {
-                dir = Direction.Right;
-                return true;
-            }
+        if(Input.GetKey(KeyCode.A)) {
+            dir = Direction.Left;
+            return true;
         }
-        else {
-            if(vertical < 0) {
-                dir = Direction.Down;
-                return true;
-            }
-            if(vertical > 0) {
-                dir = Direction.Up;
-                return true;
-            }
+        if(Input.GetKey(KeyCode.D)) {
+            dir = Direction.Right;
+            return true;
         }
+        if(Input.GetKey(KeyCode.W)) {
+           dir = Direction.Up;
+           return true;
+        }
+        if(Input.GetKey(KeyCode.S)) {
+           dir = Direction.Down;
+           return true;
+       }
         dir = Direction.Left;
         return false;
     }
