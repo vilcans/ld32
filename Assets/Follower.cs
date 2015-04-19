@@ -7,6 +7,7 @@ public class Follower : MonoBehaviour {
         Child,
         Adult,
         Parent,
+        Terrorist,
     }
 
     public DirectionMap goal;

@@ -405,6 +405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9f3eafd881442849f080c3e20159e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfTerrorists: 0
+  state: 0
 --- !u!82 &1422719701
 AudioSource:
   m_ObjectHideFlags: 0

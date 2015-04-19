@@ -23,14 +23,22 @@ public class Occupation : MonoBehaviour {
             return;
         }
         while(releaseTimes.Count != 0 && releaseTimes.Peek() <= now) {
-            releaseTimes.Dequeue();
-            DirectionMap place = GetComponent<DirectionMap>();
-            BuildHouse buildHouse = GetComponent<BuildHouse>();
-            if(buildHouse != null) {
-                buildHouse.Execute(place.targetColumn, place.targetRow);
+            if(this.nextState == Follower.State.Terrorist) {
+                // Game over!
+                EduGame game = GetComponentInParent<EduGame>();
+                game.EnterGameOver();
+                break;
             }
-            if(nextStagePrefab != null) {
-                SpawnNextStage();
+            else {
+                releaseTimes.Dequeue();
+                DirectionMap place = GetComponent<DirectionMap>();
+                BuildHouse buildHouse = GetComponent<BuildHouse>();
+                if(buildHouse != null) {
+                    buildHouse.Execute(place.targetColumn, place.targetRow);
+                }
+                if(nextStagePrefab != null) {
+                    SpawnNextStage();
+                }
             }
         }
     }
