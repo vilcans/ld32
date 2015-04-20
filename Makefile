@@ -1,6 +1,6 @@
 PROJECT=ld32
 #VERSION=0.1.0-$(shell date '+%Y%m%d.%H%M%S')
-VERSION=1.0.0
+VERSION=1.0.0-1
 FILENAME=$(PROJECT)-$(VERSION)
 RELEASE_DIR=Build/release
 
@@ -26,7 +26,7 @@ $(RELEASE_DIR)/$(FILENAME)-linux.tar.gz:
 	mkdir -p Build/release
 	mkdir -p Build/ziptemp
 	cp -r Build/linux Build/ziptemp/$(FILENAME)
-	tar -czf $@ -C Build/ziptemp .
+	tar -czf $@ --exclude '.DS_Store' -C Build/ziptemp $(FILENAME)
 
 clean:
 	rm -rf Build/release
