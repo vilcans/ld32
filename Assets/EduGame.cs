@@ -39,12 +39,19 @@ public class EduGame : MonoBehaviour {
 
     private IEnumerator RestartSoon() {
         yield return new WaitForSeconds(timeBeforeRestart);
-        Application.LoadLevel("Main");
+        Restart();
+    }
+
+    public void Restart() {
+        Application.LoadLevel(0);
     }
 
     public void Update() {
-        if(Input.GetKeyDown(KeyCode.Alpha1)) {
-            EnterWinState();
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
+        if(Input.GetKeyDown(KeyCode.R)) {
+            Restart();
         }
     }
 

@@ -495,7 +495,7 @@ MonoBehaviour:
   housesLeft: 0
   state: 0
   winSound: {fileID: 8300000, guid: 69654c188ab5743738eb63b16b8504fe, type: 3}
-  timeBeforeRestart: 3
+  timeBeforeRestart: 6
   loseTexture: {fileID: 2800000, guid: 25e86a31359004cbdad8a099bdbee6d8, type: 3}
   winTexture: {fileID: 2800000, guid: 8413f75e437fb4cf1b3d9c58f5a88737, type: 3}
 --- !u!114 &1422719701
