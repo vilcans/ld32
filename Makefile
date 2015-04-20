@@ -1,6 +1,6 @@
 PROJECT=ld32
 #VERSION=0.1.0-$(shell date '+%Y%m%d.%H%M%S')
-VERSION=0.1.0
+VERSION=1.0.0
 FILENAME=$(PROJECT)-$(VERSION)
 RELEASE_DIR=Build/release
 
