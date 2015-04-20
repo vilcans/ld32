@@ -66,6 +66,6 @@ public class EduGame : MonoBehaviour {
                 alphaBlend: true
             );
         }
-        GUI.Label(rect, housesLeft + " houses");
+        //GUI.Label(rect, housesLeft + " houses");
     }
 }
