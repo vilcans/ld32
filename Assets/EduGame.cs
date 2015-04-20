@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class EduGame : MonoBehaviour {
-    public int numberOfTerrorists;
+    public int housesLeft = 0;
 
     public enum State {
         InGame,
@@ -9,7 +10,9 @@ public class EduGame : MonoBehaviour {
         Win
     };
     public State state = State.InGame;
+    public AudioClip winSound;
 
+    public float timeBeforeRestart = 3;
     public Texture loseTexture;
     public Texture winTexture;
 
@@ -19,12 +22,37 @@ public class EduGame : MonoBehaviour {
         }
         Debug.Log("Entering game over state");
         state = State.GameOver;
+        StartCoroutine(RestartSoon());
+    }
+
+    public void EnterWinState() {
+        if(state != State.InGame) {
+            return;
+        }
+        Debug.Log("Entering win state");
+        state = State.Win;
+        StartCoroutine(RestartSoon());
+        AudioSource musicSource = GetComponentInChildren<AudioSource>();
+        musicSource.Stop();
+        musicSource.PlayOneShot(winSound);
+    }
+
+    private IEnumerator RestartSoon() {
+        yield return new WaitForSeconds(timeBeforeRestart);
+        Application.LoadLevel("Main");
+    }
+
+    public void Update() {
+        if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            EnterWinState();
+        }
     }
 
     public void OnGUI() {
+        Rect rect = new Rect(0, 0, Screen.width, Screen.height);
         if(state == State.GameOver) {
             GUI.DrawTexture(
-                new Rect(0, 0, Screen.width, Screen.height),
+                rect,
                 loseTexture,
                 ScaleMode.ScaleToFit,
                 alphaBlend: true
@@ -32,11 +60,12 @@ public class EduGame : MonoBehaviour {
         }
         else if(state == State.Win) {
             GUI.DrawTexture(
-                new Rect(0, 0, Screen.width, Screen.height),
-                loseTexture,
+                rect,
+                winTexture,
                 ScaleMode.ScaleToFit,
                 alphaBlend: true
             );
         }
+        GUI.Label(rect, housesLeft + " houses");
     }
 }

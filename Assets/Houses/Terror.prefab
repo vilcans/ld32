@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageTime: 0
   capacity: 10
-  minOccupancyForNextStage: 10
+  minOccupancyForNextStage: 3
   nextState: 3
   nextStagePrefab: {fileID: 0}
 --- !u!114 &11427164

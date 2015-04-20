@@ -9,5 +9,9 @@ public class BuildHouse : MonoBehaviour {
         DestroyObject(this.gameObject);
         GameObject obj = map.CreateObject(tileType, col, row);
         Debug.Log(this + " built house " + obj);
+        EduGame game = GetComponentInParent<EduGame>();
+        if(--game.housesLeft == 0) {
+            game.EnterWinState();
+        }
     }
 }

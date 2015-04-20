@@ -32,10 +32,14 @@ public class TileMap : MonoBehaviour {
     }
 
     void CreateObjects() {
+        EduGame game = GetComponentInParent<EduGame>();
         for(int row = 0; row < height; ++row) {
             for(int col = 0; col < width; ++col) {
                 int index = row * width + col;
                 byte tileCode = tileData[index];
+                if(tileCode == 81) {
+                    ++game.housesLeft;
+                }
                 GameObject obj = CreateObject(tileCode, col, row);
                 if(obj == null) {
                     continue;
